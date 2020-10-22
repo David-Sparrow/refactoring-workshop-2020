@@ -59,6 +59,8 @@ private:
 
     void displaySnake();
 
+    bool isRequestedFoodCollidedWithSnake(FoodInd receivedFood);
+
 
 };
 
