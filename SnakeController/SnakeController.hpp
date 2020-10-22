@@ -57,6 +57,8 @@ private:
 
     bool isSnakeOutOfMap(Segment newHead);
 
+    void displaySnake();
+
 
 };
 

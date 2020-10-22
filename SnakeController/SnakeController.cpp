@@ -80,16 +80,7 @@ void Controller::receive(std::unique_ptr<Event> e)
                 m_scorePort.send(std::make_unique<EventT<LooseInd>>());
                 lost = true;
             } else {
-                for (auto &segment : m_segments) {
-                    if (not --segment.ttl) {
-                        DisplayInd l_evt;
-                        l_evt.x = segment.x;
-                        l_evt.y = segment.y;
-                        l_evt.value = Cell_FREE;
-
-                        m_displayPort.send(std::make_unique<EventT<DisplayInd>>(l_evt));
-                    }
-                }
+                displaySnake();
             }
         }
 
@@ -210,6 +201,19 @@ void Controller::receive(std::unique_ptr<Event> e)
         return (newHead.x < 0 or newHead.y < 0 or
         newHead.x >= m_mapDimension.first or
         newHead.y >= m_mapDimension.second);
+    }
+
+    void Controller::displaySnake() {
+        for (auto &segment : m_segments) {
+            if (not --segment.ttl) {
+                DisplayInd l_evt;
+                l_evt.x = segment.x;
+                l_evt.y = segment.y;
+                l_evt.value = Cell_FREE;
+
+                m_displayPort.send(std::make_unique<EventT<DisplayInd>>(l_evt));
+            }
+        }
     }
 
 
