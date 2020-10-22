@@ -55,6 +55,8 @@ private:
 
     bool canSnakeEatFood (Segment newHead);
 
+    bool isSnakeOutOfMap(Segment newHead);
+
 
 };
 

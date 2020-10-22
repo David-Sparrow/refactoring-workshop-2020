@@ -76,9 +76,7 @@ void Controller::receive(std::unique_ptr<Event> e)
             if (canSnakeEatFood(newHead)) {
                 m_scorePort.send(std::make_unique<EventT<ScoreInd>>());
                 m_foodPort.send(std::make_unique<EventT<FoodReq>>());
-            } else if (newHead.x < 0 or newHead.y < 0 or
-                       newHead.x >= m_mapDimension.first or
-                       newHead.y >= m_mapDimension.second) {
+            } else if (isSnakeOutOfMap(newHead)) {
                 m_scorePort.send(std::make_unique<EventT<LooseInd>>());
                 lost = true;
             } else {
@@ -206,6 +204,12 @@ void Controller::receive(std::unique_ptr<Event> e)
 
     bool Controller::canSnakeEatFood(Controller::Segment newHead) {
         return std::make_pair(newHead.x, newHead.y) == m_foodPosition;
+    }
+
+    bool Controller::isSnakeOutOfMap(Controller::Segment newHead) {
+        return (newHead.x < 0 or newHead.y < 0 or
+        newHead.x >= m_mapDimension.first or
+        newHead.y >= m_mapDimension.second);
     }
 
 
