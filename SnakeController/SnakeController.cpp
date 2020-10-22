@@ -70,7 +70,7 @@ void Controller::receive(std::unique_ptr<Event> e)
 
         Segment newHead = makeNewHead();
 
-        bool lost = isSnakeLost(newHead);
+        bool lost = isSnakeTouchItself(newHead);
 
         if (not lost) {
             if (std::make_pair(newHead.x, newHead.y) == m_foodPosition) {
@@ -190,7 +190,7 @@ void Controller::receive(std::unique_ptr<Event> e)
         return newHead;
     }
 
-    bool Controller::isSnakeLost(Controller::Segment newHead) {
+    bool Controller::isSnakeTouchItself(Controller::Segment newHead) {
         bool lost = false;
 
         for (auto segment : m_segments) {

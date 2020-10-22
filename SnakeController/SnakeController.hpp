@@ -51,7 +51,7 @@ private:
 
     Segment makeNewHead();
 
-    bool isSnakeLost(Segment newHead);
+    bool isSnakeTouchItself(Segment newHead);
 
 };
 
