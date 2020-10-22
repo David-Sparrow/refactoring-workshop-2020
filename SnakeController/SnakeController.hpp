@@ -51,6 +51,8 @@ private:
 
     Segment makeNewHead();
 
+    bool isSnakeLost(Segment newHead);
+
 };
 
 } // namespace Snake
