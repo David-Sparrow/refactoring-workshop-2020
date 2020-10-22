@@ -53,6 +53,9 @@ private:
 
     bool isSnakeTouchItself(Segment newHead);
 
+    bool canSnakeEatFood (Segment newHead);
+
+
 };
 
 } // namespace Snake

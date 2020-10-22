@@ -73,7 +73,7 @@ void Controller::receive(std::unique_ptr<Event> e)
         bool lost = isSnakeTouchItself(newHead);
 
         if (not lost) {
-            if (std::make_pair(newHead.x, newHead.y) == m_foodPosition) {
+            if (canSnakeEatFood(newHead)) {
                 m_scorePort.send(std::make_unique<EventT<ScoreInd>>());
                 m_foodPort.send(std::make_unique<EventT<FoodReq>>());
             } else if (newHead.x < 0 or newHead.y < 0 or
@@ -203,5 +203,10 @@ void Controller::receive(std::unique_ptr<Event> e)
 
         return lost;
     }
+
+    bool Controller::canSnakeEatFood(Controller::Segment newHead) {
+        return std::make_pair(newHead.x, newHead.y) == m_foodPosition;
+    }
+
 
 } // namespace Snake
