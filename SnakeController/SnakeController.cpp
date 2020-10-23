@@ -215,8 +215,6 @@ Controller::Segment Controller::getNewHead() const
 
 void Controller::receive(std::unique_ptr<Event> e)
 {
-    void Controller::receive(std::unique_ptr<Event> e)
-    {
         switch(e->getMessageId())
         {
             case TimeoutInd::MESSAGE_ID:
@@ -235,6 +233,4 @@ void Controller::receive(std::unique_ptr<Event> e)
                 throw UnexpectedEventException();
         }
     }
-}
-
 } // namespace Snake
