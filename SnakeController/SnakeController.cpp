@@ -95,7 +95,7 @@ void Controller::sendClearOldFood()
     m_displayPort.send(std::make_unique<EventT<DisplayInd>>(clearOldFood));
 }
 
-namespace
+/*namespace
 {
 bool isHorizontal(Direction direction)
 {
@@ -117,15 +117,15 @@ bool perpendicular(Direction dir1, Direction dir2)
 {
     return isHorizontal(dir1) == isVertical(dir2);
 }
-} // namespace
+} // namespace*/
 
 Controller::Segment Controller::calculateNewHead() const
 {
     Segment const& currentHead = m_segments.front();
 
     Segment newHead;
-    newHead.x = currentHead.x + (isHorizontal(m_currentDirection) ? isPositive(m_currentDirection) ? 1 : -1 : 0);
-    newHead.y = currentHead.y + (isVertical(m_currentDirection) ? isPositive(m_currentDirection) ? 1 : -1 : 0);
+    newHead.x = currentHead.x + (m_map.isHorizontal(m_currentDirection) ? m_map.isPositive(m_currentDirection) ? 1 : -1 : 0);
+    newHead.y = currentHead.y + (m_map.isVertical(m_currentDirection) ? m_map.isPositive(m_currentDirection) ? 1 : -1 : 0);
 
     return newHead;
 }
